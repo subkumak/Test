@@ -1,0 +1,74 @@
+
+
+openssl req -newkey rsa:2048 -nodes -keyout datastageqm.key -x509 -days 365 -out datastageqm.crt -subj "/C=IN/ST=Kar/L=Blr/O=IBM/OU=EE/CN=datastageqm"
+
+
+oc login --token=sha256~i-VkDyonP6EZMxrpZdkqQn9oT5q69NQux42xZYd0QlA --server=https://api.itz-bxiuuj.osv.techzone.ibm.com:6443
+
+
+oc create secret tls datastageqmsecret --key="datastageqm.key" --cert="datastageqm.crt" -n cp4i
+
+
+
+
+
+
+subkumak@H579W2YPFQ ~ % cd Downloads
+subkumak@H579W2YPFQ Downloads % mkdir datastageqm
+subkumak@H579W2YPFQ Downloads % cd datastageqm
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % openssl req -newkey rsa:2048 -nodes -keyout datastageqm.key -x509 -days 365 -out datastageqm.crt -subj "/C=IN/ST=KAR/L=BLR/O=IBM/OU=EE/CN=datastageqm"
+.+...+..+++++++++++++++++++++++++++++++++++++++*...+........+....+..+.+++++++++++++++++++++++++++++++++++++++*....+.....+...+...+...+.........+............+.+...+..+...+....+...............+..+...+..........+...+..+......+....+......+...............+..+...+.+...+...+.........+...+........+...+....+.....+............+...+...........................+....+.....+................+.....................+............+........+.......+.....+.+......+...+...........+.........+.+...........+.+........+......+.+..............+.........................+...+..+..........+...+........+...+.+........+...............+.+......+.....+.+.....+....+.....+....+..............+.+..+..................+.+...+.....++++++
+........+...........+....+.........+............+...+.....+...+...+.+++++++++++++++++++++++++++++++++++++++*.....+.................+...+....+......+.....+...+....+...+...+...........+...+......+.......+..+.+.........+..+....+.....+......+.+...+..+.......+.....+......+......+......+...+......+.............+...........+.+......+..+.......+.....+.+...+............+.....+....+.....+.+..+...+++++++++++++++++++++++++++++++++++++++*...+.........+...+..+.........+....+......+.....+................+...+..++++++
+-----
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % ls -ltr
+total 16
+-rw-------  1 subkumak  staff  1704 Jul 17 21:31 datastageqm.key
+-rw-r--r--  1 subkumak  staff  1302 Jul 17 21:31 datastageqm.crt
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % oc login --token=sha256~i-VkDyonP6EZMxrpZdkqQn9oT5q69NQux42xZYd0QlA --server=https://api.itz-bxiuuj.osv.techzone.ibm.com:6443
+Logged into "https://api.itz-bxiuuj.osv.techzone.ibm.com:6443" as "kube:admin" using the token provided.
+
+You have access to 78 projects, the list has been suppressed. You can list all projects with 'oc projects'
+
+Using project "cp4i".
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % code .
+subkumak@H579W2YPFQ datastageqm % oc create secret tls datastageqmsecret --key="datastageqm.key" --cert="datastageqm.crt" -n cp4i
+secret/datastageqmsecret created
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % ls -ltr
+total 40
+-rw-------  1 subkumak  staff  1704 Jul 17 21:31 datastageqm.key
+-rw-r--r--  1 subkumak  staff  1302 Jul 17 21:31 datastageqm.crt
+-rw-r--r--  1 subkumak  staff   332 Jul 17 21:38 createconfigmap.yaml
+-rw-r--r--  1 subkumak  staff   679 Jul 17 21:50 createqmgr.yaml
+-rw-r--r--  1 subkumak  staff   279 Jul 17 22:12 createroute.yaml
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % oc apply -f createconfigmap.yaml
+configmap/configmqsc created
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % oc apply -f createqmgr.yaml
+error: error parsing createqmgr.yaml: error converting YAML to JSON: yaml: line 10: did not find expected key
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % oc apply -f createqmgr.yaml
+error: error parsing createqmgr.yaml: error converting YAML to JSON: yaml: line 11: did not find expected key
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % oc apply -f createqmgr.yaml
+queuemanager.mq.ibm.com/datastageqm created
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm % oc apply -f createroute.yaml
+route.route.openshift.io/datastageqm-qmgr-ibm-mq-qm created
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %
+subkumak@H579W2YPFQ datastageqm %

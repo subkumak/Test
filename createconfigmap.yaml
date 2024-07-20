@@ -1,0 +1,11 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: configmqsc
+  namespace: cp4i
+data:
+  creatmqdef.mqsc: |-
+    define ql(QUEUE.IN)
+    DEFINE CHANNEL(CHANNEL1.SVRCONN) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12')
+    set chlauth(FLAGSTAFF) TYPE(BLOCKUSER) USERLIST(NOBODY)
+    REFRESH SECURITY TYPE(CONNAUTH)

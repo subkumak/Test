@@ -1,0 +1,15 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: datastageqm-qmgr-ibm-mq-qm
+  namespace: cp4i
+spec:
+  host: datastageqm.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: datastageqm-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
+  wildcardPolicy: None

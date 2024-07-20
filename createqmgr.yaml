@@ -1,0 +1,39 @@
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: datastageqm
+  namespace: cp4i
+spec:
+  version: 9.4.0.0-r2
+  license:
+    accept: true
+    license: L-EHXT-MQCRN9
+    use: "Production"
+  pki:
+    keys:
+      - name: default
+        secret:
+          secretName: datastageqmsecret
+          items:
+            - tls.key
+            - tls.crt
+  web:
+    enabled: true
+  queueManager:
+    availability: 
+      type: SingleInstance
+    storage:
+      queueManager:
+        type: ephemeral
+    mqsc:
+      - configMap:
+          name: configmqsc
+          items: 
+            - creatmqdef.mqsc
+  template:
+    pod:
+      containers:
+        - env:
+            - name: MQSNOAUT
+              value: 'yes'
+          name: qmgr
